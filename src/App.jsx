@@ -86,7 +86,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1 className="heading">My Expense Tracker</h1>
+      <h1 className="heading">Personal Expense Tracker</h1>
       <div className="container">
         <form onSubmit={handleSubmit} className="new-expense">
           <header>
