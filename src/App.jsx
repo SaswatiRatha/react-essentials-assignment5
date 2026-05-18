@@ -15,7 +15,7 @@ export default function App() {
     monthlyExpense,
     monthlyTransanctions,
   } = useExpense();
-  const { filters, updateFilter, clearFilter, sortedData, activeFilterCount } =
+  const { filters, updateFilter, clearFilter, sortedData } =
     useFilter(expenses);
 
   const [amount, setAmount] = useState("");
@@ -94,61 +94,61 @@ export default function App() {
           </header>
           <section className="form-grid">
             <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <input
-              type="text"
-              id="description"
-              className="form-description"
-              value={description}
-              placeholder="What did you spend on?"
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="amount">Amount</label>
-            <input
-              type="number"
-              step="0.01"
-              id="amount"
-              className="form-amount"
-              value={amount}
-              placeholder="0.00"
-              onChange={(e) => setAmount(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="category">Category</label>
-            <select
-              id="category"
-              className="form-category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-            >
-              {categories.slice(1).map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="date">Date</label>
-            <input
-              type="date"
-              id="date"
-              className="form-date"
-              value={date}
-              placeholder="0.00"
-              onChange={(e) => setDate(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="add-btn">
-            Add Expense
-          </button>
+              <label htmlFor="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                className="form-description"
+                value={description}
+                placeholder="What did you spend on?"
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="amount">Amount</label>
+              <input
+                type="number"
+                step="0.01"
+                id="amount"
+                className="form-amount"
+                value={amount}
+                placeholder="0.00"
+                onChange={(e) => setAmount(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="category">Category</label>
+              <select
+                id="category"
+                className="form-category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
+                {categories.slice(1).map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="date">Date</label>
+              <input
+                type="date"
+                id="date"
+                className="form-date"
+                value={date}
+                placeholder="0.00"
+                onChange={(e) => setDate(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="add-btn">
+              Add Expense
+            </button>
           </section>
         </form>
 
@@ -239,27 +239,27 @@ export default function App() {
               Clear Filters
             </button>
           </section>
-            
-          
         </div>
 
         <div className="display-expense">
-          {sortedData.length === 0 ? activeFilterCount>0?(
-            <p className="no-expense">
-              <i>No matches found. Try refining your filter!</i>
-            </p>
-          ): (
-            <p className="no-expense">
-              <i>No expense yet. Add your first expense above!</i>
-            </p>
+          {sortedData.length === 0 ? (
+            expenses.length === 0 ? (
+              <p className="no-expense">
+                <i>No expense yet. Add your first expense above!</i>
+              </p>
+            ) : (
+              <p className="no-expense">
+                <i>No matches found. Try refining your filter!</i>
+              </p>
+            )
           ) : (
             <>
               <div className="expense-headers">
                 <p className="header-description">Description</p>
                 <div className="expense-header-details">
                   <p className="header-category">Category</p>
-                <p className="header-date">Date</p>
-                <p className="header-amount">Amount</p>
+                  <p className="header-date">Date</p>
+                  <p className="header-amount">Amount</p>
                 </div>
                 <p className="header-actions">Actions</p>
               </div>
@@ -268,14 +268,14 @@ export default function App() {
                   editingId === expense.id ? (
                     <div key={expense.id} className="edit-form">
                       <input
-                          type="text"
-                          id="description"
-                          className="edit-description"
-                          value={editedData.description}
-                          onChange={(e) =>
-                            handleEditChange("description", e.target.value)
-                          }
-                        />
+                        type="text"
+                        id="description"
+                        className="edit-description"
+                        value={editedData.description}
+                        onChange={(e) =>
+                          handleEditChange("description", e.target.value)
+                        }
+                      />
                       <div className="edit-info">
                         <select
                           id="category"
@@ -291,10 +291,12 @@ export default function App() {
                             </option>
                           ))}
                         </select>
-                        <input 
+                        <input
                           type="date"
                           value={editedData.date}
-                          onChange={(e)=> handleEditChange("date", e.target.value)}
+                          onChange={(e) =>
+                            handleEditChange("date", e.target.value)
+                          }
                         />
                         <input
                           type="number"
@@ -321,20 +323,19 @@ export default function App() {
                     </div>
                   ) : (
                     <div key={expense.id} className="expense-card">
-                        <h3 className="display-description">
-                          {expense.description}
-                        </h3>
-                        <div className="expense-details">
-                          <p className="display-category">{expense.category}</p>
-                        
+                      <h3 className="display-description">
+                        {expense.description}
+                      </h3>
+                      <div className="expense-details">
+                        <p className="display-category">{expense.category}</p>
+
                         <p className="display-date">{expense.date}</p>
-                                            
+
                         <p className="display-amount">
                           ₹{expense.amount.toFixed(2)}
                         </p>
-                        </div>
-                        
-                      
+                      </div>
+
                       <div className="expense-actions">
                         <button
                           className="edit-btn"
@@ -349,8 +350,6 @@ export default function App() {
                           Delete
                         </button>
                       </div>
-                        
-                      
                     </div>
                   ),
                 )}
@@ -375,7 +374,6 @@ export default function App() {
           </div>
         </div>
       </div>
-        
     </div>
   );
 }

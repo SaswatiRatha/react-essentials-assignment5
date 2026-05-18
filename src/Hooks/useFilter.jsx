@@ -80,23 +80,12 @@ const useFilter = (expenses) => {
         return filteredData;
     },[filteredData,filters.sortBy]);
 
-    const activeFilterCount = useMemo(() => {
-        return Object.entries(filters).filter(([key, value]) => {
-            if(key === 'category'){
-                return value !== 'all';
-            }
-            return value !== '';
-        }).length;
-
-    }, [filters]);
-
     return {
         filters,
         updateFilter,
         clearFilter,
         filteredData,
         sortedData,
-        activeFilterCount,
     }
 
 }
