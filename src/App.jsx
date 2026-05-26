@@ -25,15 +25,7 @@ export default function App() {
 
   const [editedData, setEditedData] = useState({});
 
-  const categories = [
-    "All",
-    "Food",
-    "Travel",
-    "Bill",
-    "Shopping",
-    "Entertainment",
-    "Others",
-  ];
+  const categories = ["All", "Food", "Travel", "Bill", "Shopping", "Entertainment", "Others"];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,12 +53,12 @@ export default function App() {
     });
   };
 
-  const handleEditChange = (field, value) => {
+const handleEditChange = (field, value) => {
     setEditedData((prev) => ({
       ...prev,
       [field]: value,
     }));
-  };
+  }
 
   const handleSaveEdit = () => {
     updateExpense(editingId, {
@@ -127,11 +119,11 @@ export default function App() {
                 onChange={(e) => setCategory(e.target.value)}
                 required
               >
-                {categories.slice(1).map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
+              {categories.slice(1).map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
               </select>
             </div>
             <div className="form-group">
@@ -160,10 +152,10 @@ export default function App() {
             <div className="filter-search">
               <p>Search</p>
               <input
-                type="text"
-                value={filters.searchTerm}
-                placeholder="Search description..."
-                onChange={(e) => updateFilter("searchTerm", e.target.value)}
+              type="text"
+              value={filters.searchTerm}
+              placeholder="Search description..."
+              onChange={(e) => updateFilter("searchTerm", e.target.value)}
               />
             </div>
             <div className="sort-data">
@@ -190,9 +182,9 @@ export default function App() {
                 onChange={(e) => updateFilter("category", e.target.value)}
               >
                 {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
+                <option key={category} value={category}>
+                  {category}
+                </option>
                 ))}
               </select>
             </div>
@@ -210,7 +202,7 @@ export default function App() {
                 type="date"
                 value={filters.dateTo}
                 onChange={(e) => updateFilter("dateTo", e.target.value)}
-              />
+                />
             </div>
             <div className="filter-minamount">
               <p>Min Amount</p>
@@ -244,9 +236,9 @@ export default function App() {
         <div className="display-expense">
           {sortedData.length === 0 ? (
             expenses.length === 0 ? (
-              <p className="no-expense">
-                <i>No expense yet. Add your first expense above!</i>
-              </p>
+            <p className="no-expense">
+              <i>No expense yet. Add your first expense above!</i>
+            </p>
             ) : (
               <p className="no-expense">
                 <i>No matches found. Try refining your filter!</i>
@@ -273,7 +265,7 @@ export default function App() {
                         className="edit-description"
                         value={editedData.description}
                         onChange={(e) =>
-                          handleEditChange("description", e.target.value)
+                        handleEditChange("description", e.target.value)
                         }
                       />
                       <div className="edit-info">
@@ -332,7 +324,7 @@ export default function App() {
                         <p className="display-date">{expense.date}</p>
 
                         <p className="display-amount">
-                          ₹{expense.amount.toFixed(2)}
+                        {expense.amount.toFixed(2)}
                         </p>
                       </div>
 
@@ -341,13 +333,13 @@ export default function App() {
                           className="edit-btn"
                           onClick={() => handleEdit(expense)}
                         >
-                          Edit
+                        Edit
                         </button>
                         <button
                           className="delete-btn"
                           onClick={() => removeExpense(expense.id)}
                         >
-                          Delete
+                        Delete
                         </button>
                       </div>
                     </div>
@@ -355,7 +347,7 @@ export default function App() {
                 )}
               </div>
             </>
-          )}
+          )}  
         </div>
 
         <div className="display-summary">

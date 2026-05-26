@@ -63,8 +63,6 @@ const useExpense = () => {
     });
   },[expenses]);
 
-  //const totalExpense = useMemo(()=> expenses.reduce((sum,expense)=>sum+expense,0),[expenses]);
-
   return {
     expenses,
     addExpense,
